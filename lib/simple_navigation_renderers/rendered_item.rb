@@ -44,12 +44,12 @@ module SimpleNavigationRenderers
       end
 
       def li_divider
-        options[:class] = [ options[:class], ((level == 1) ? "divider-vertical" : "divider") ].flatten.compact.join(' ')
+        options[:class] = [ options[:class], ((level == 1) ? 'divider-vertical' : 'divider') ].flatten.compact.join(' ')
         content_tag(:li, '', options)
       end
 
       def li_header
-        options[:class] = [ options[:class], ((bootstrap_version == 3) ? "dropdown-header" : "nav-header") ].flatten.compact.join(' ')
+        options[:class] = [ options[:class], ((bootstrap_version == 3) ? 'dropdown-header' : 'nav-header') ].flatten.compact.join(' ')
         content_tag(:li, item.name, options)
       end
 
@@ -59,7 +59,7 @@ module SimpleNavigationRenderers
             if split
               splitted_simple_part + splitted_dropdown_part
             else
-              dropdown_part( item.name + ' ' + caret )
+              dropdown_part( "#{item.name} #{caret}".html_safe )
             end
           else
             content_tag(:li, dropdown_submenu_link, options)
@@ -71,40 +71,40 @@ module SimpleNavigationRenderers
 
       def splitted_simple_part
         main_li_options = options.dup
-        main_li_options[:class] = [ main_li_options[:class], "dropdown-split-left" ].flatten.compact.join(' ')
+        main_li_options[:class] = [ main_li_options[:class], 'dropdown-split-left' ].flatten.compact.join(' ')
         content_tag(:li, simple_link, main_li_options)
       end
 
       def splitted_dropdown_part
-        item.sub_navigation.dom_class = [ item.sub_navigation.dom_class, "pull-right" ].flatten.compact.join(' ')
+        item.sub_navigation.dom_class = [ item.sub_navigation.dom_class, 'pull-right' ].flatten.compact.join(' ')
         link_options = {}
         options[:id] = nil
-        options[:class] = [ options[:class], "dropdown-split-right" ].flatten.compact.join(' ')
+        options[:class] = [ options[:class], 'dropdown-split-right' ].flatten.compact.join(' ')
         dropdown_part( caret )
       end
 
       def dropdown_part( name )
-        options[:class] = [ options[:class], "dropdown" ].flatten.compact.join(' ')
-        link_options[:class] = [ link_options[:class], "dropdown-toggle" ].flatten.compact.join(' ')
-        link_options[:"data-toggle"] = "dropdown"
-        link_options[:"data-target"] = "#"
+        options[:class] = [ options[:class], 'dropdown' ].flatten.compact.join(' ')
+        link_options[:class] = [ link_options[:class], 'dropdown-toggle' ].flatten.compact.join(' ')
+        link_options[:'data-toggle'] = 'dropdown'
+        link_options[:'data-target'] = '#'
 
-        content = link_to( name, "#", link_options ) + render_sub_navigation_for(item)
+        content = link_to( name, '#', link_options ) + render_sub_navigation_for(item)
         content_tag(:li, content, options)
       end
 
       def caret
-        content_tag(:b, '', class: "caret")
+        content_tag(:b, '', class: 'caret')
       end
 
       def dropdown_submenu_link
-        options[:class] = [ options[:class], "dropdown-submenu" ].flatten.compact.join(' ')
+        options[:class] = [ options[:class], 'dropdown-submenu' ].flatten.compact.join(' ')
         simple_link + render_sub_navigation_for(item)
       end
 
       def simple_link
         link_options[:method] ||= item.method
-        link_to(item.name, (item.url || "#"), link_options)
+        link_to(item.name, (item.url || '#'), link_options)
       end
 
   end
