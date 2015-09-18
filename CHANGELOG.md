@@ -1,3 +1,8 @@
+## v1.0.4
+
+* fix README
+* code refactoring
+
 ## v1.0.3
 
 * update gem versions
