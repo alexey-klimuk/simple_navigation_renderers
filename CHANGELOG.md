@@ -1,3 +1,9 @@
+## v1.0.3
+
+* update gem versions
+* prevent deprecations for rails 4.2
+* update gitignore
+
 ## v1.0.2
 
 * fix README
